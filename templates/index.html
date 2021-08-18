@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Malaria Detection DL Model</title>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Ubuntu" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="static\css\styles.css">
+  <link href="{{ url_for('static', filename='static/styles.css') }}" rel="stylesheet">
+
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <style>
+   .lifecycle {
+  width: 50%;
+  height: 40%;
+  margin-top: 2px;
+}
+ .pressfix{
+  font-family: "Montserrat-Black";
+  font-size: 3rem;
+
+
+}
+.testimonial-text {
+  font-size: 2rem;
+  line-height: 1.5;
+}
+
+
+}
+.end-image {
+  width: 30%;
+  border-radius: 100%;
+  margin: 20px;
+}
+  </style>
+</head>
+
+<body>
+
+  <section class="colored-section" id="title">
+
+    <div class="container-fluid">
+
+
+
+      <nav class="navbar navbar-expand-lg navbar-dark">
+
+        <a class="navbar-brand" href="">Malaria Detection using CNN</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+          <ul class="navbar-nav ml-auto">
+          </ul>
+
+        </div>
+      </nav>
+
+
+
+
+      <div class="row">
+
+        <div class="col-lg-6">
+          <h1 class="big-heading">Welcome to our website!</h1>
+          <h1 class="big-heading">Click on Test Image to upload your image for malaria detection</h1>
+          <button class="nav-item">
+            <a class="nav-link" href="#prediction">Test Image</a>
+          </li>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+
+   <!-- Testimonials -->
+
+  <section class="colored-section" id="testimonials">
+
+    <div id="testimonial-carousel" class="carousel slide" data-ride="false">
+      <div class="carousel-inner">
+        <div class="carousel-item active container-fluid">
+          <h2 class="testimonial-text">Top 5 Facts about Malaria</h2>
+          <h3 class="testimonial-text">1- Among all communicable diseases, malaria is the third largest killer of children between the ages of one month and five years, following pneumonia and diarrhea.</h3>
+        </div>
+        <div class="carousel-item container-fluid">
+          <h2 class="testimonial-text">Top 5 Facts about Malaria</h2>
+          <h3 class="testimonial-text">2- The word “malaria” means “bad air.</h3>
+
+        </div>
+        <div class="carousel-item container-fluid">
+          <h2 class="testimonial-text">Top 5 Facts about Malaria</h2>
+          <h3 class="testimonial-text">3- Malaria is spread by parasites. </h3>
+        </div>
+
+        <div class="carousel-item container-fluid">
+          <h2 class="testimonial-text">Top 5 Facts about Malaria</h2>
+          <h3 class="testimonial-text">4- Malaria can pass from human to human.</h3>
+        </div>
+
+        <div class="carousel-item container-fluid">
+          <h2 class="testimonial-text">Top 5 Facts about Malaria</h2>
+          <h3 class="testimonial-text">5- There is a cure for malaria</h3>
+        </div>
+
+      </div>
+      <a class="carousel-control-prev" href="#testimonial-carousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-prev" href="#testimonial-carousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#testimonial-carousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+
+  </section>
+
+
+
+
+
+  <section class="white-section" id="prediction">
+
+    <h2 class="section-heading">Upload Image To Test For Malaria</p>
+  <br>
+
+  <div style="width: 100%;">
+      <div class="subheading-left">
+          <h2 style="float: left; margin-left: 10%;"></h2>
+      </div>
+
+      <div class="subheading-right">
+          <h2 style="margin-right: 29%;"></h2>
+      </div>
+  </div>
+
+  <div style="width: 100%;">
+
+
+      <div class="box">
+
+          <div>
+              {% if uploaded_image %}
+              <div>
+                  <div id="align-span">
+                      <img src="{{ uploaded_image }}" width="200">
+                  </div>
+                  <span id="result">{{result}}</span>
+              </div>
+              {% else %}
+
+              <form action = "/predict" id="upload-file" method="post" enctype="multipart/form-data">
+
+<div class="col-sm-10">
+  <input type="file" class="form-control" placeholder="Hours Studied"  name="image" id="pwd">
+</div>
+
+                  <div>
+                      <br style="line-height: 20px;">
+                      <button type="submit" id="custom-submit">Test</button>
+                  </div>
+              </form>
+              {% endif %}
+          </div>
+
+          <br style="line-height: 10px;">
+
+          <div id="align-span">
+              <img id="output" width="200"/>
+          </div>
+
+      </div>
+
+  </div>
+
+
+
+   <script type="text/JavaScript">
+
+
+      const realFileBtn = document.getElementById("real-file");
+      const customBtn = document.getElementById("custom-button");
+      const customTxt = document.getElementById("custom-text");
+
+
+      customBtn.addEventListener("click", function() {
+          realFileBtn.click()
+      });
+
+
+      realFileBtn.addEventListener("change", function() {
+          if (realFileBtn.value)
+          {
+
+              customTxt.innerHTML = realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+              var loadFile = function(event) {
+                  var image = document.getElementById('output');
+                  image.src = URL.createObjectURL(event.target.files[0])
+              };
+
+          }
+          else
+          {
+              customTxt.innerHTML = "No file chosen yet!";
+          }
+      });
+
+
+      var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+      };
+
+
+ </script>
+
+
+
+
+
+
+  </section>
+
+
+
+
+  <section class="colored-section" id="cta">
+
+  </section>
+
+
+
+
+  <footer class="white-section" id="footer">
+    <div class="container-fluid">
+      <p>Copyright 2021 Malaria DL Model</p>
+    </div>
+  </footer>
+
+
+</body>
+
+</html>
